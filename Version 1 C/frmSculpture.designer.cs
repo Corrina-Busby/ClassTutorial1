@@ -36,42 +36,47 @@ namespace Version_1_C
             // 
             // txtMaterial
             // 
-            this.txtMaterial.Location = new System.Drawing.Point(97, 139);
+            this.txtMaterial.Location = new System.Drawing.Point(129, 171);
+            this.txtMaterial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMaterial.Name = "txtMaterial";
-            this.txtMaterial.Size = new System.Drawing.Size(96, 20);
+            this.txtMaterial.Size = new System.Drawing.Size(127, 22);
             this.txtMaterial.TabIndex = 5;
             // 
             // Label5
             // 
-            this.Label5.Location = new System.Drawing.Point(9, 142);
+            this.Label5.Location = new System.Drawing.Point(12, 175);
+            this.Label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(56, 16);
+            this.Label5.Size = new System.Drawing.Size(75, 20);
             this.Label5.TabIndex = 56;
             this.Label5.Text = "Material";
             // 
             // txtWeight
             // 
-            this.txtWeight.Location = new System.Drawing.Point(97, 107);
+            this.txtWeight.Location = new System.Drawing.Point(129, 132);
+            this.txtWeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtWeight.Name = "txtWeight";
-            this.txtWeight.Size = new System.Drawing.Size(96, 20);
+            this.txtWeight.Size = new System.Drawing.Size(127, 22);
             this.txtWeight.TabIndex = 4;
             // 
             // Label4
             // 
-            this.Label4.Location = new System.Drawing.Point(9, 110);
+            this.Label4.Location = new System.Drawing.Point(12, 135);
+            this.Label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(56, 16);
+            this.Label4.Size = new System.Drawing.Size(75, 20);
             this.Label4.TabIndex = 54;
             this.Label4.Text = "Weight";
             // 
             // frmSculpture
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(352, 181);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.ClientSize = new System.Drawing.Size(469, 223);
             this.Controls.Add(this.txtWeight);
             this.Controls.Add(this.Label4);
             this.Controls.Add(this.Label5);
             this.Controls.Add(this.txtMaterial);
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "frmSculpture";
             this.Text = "Sculpture";
             this.Controls.SetChildIndex(this.txtMaterial, 0);
