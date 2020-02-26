@@ -9,9 +9,7 @@ using System.Windows.Forms;
 namespace Version_1_C
 {
     public partial class frmSculpture : Version_1_C.frmWork
-    {
-
-        
+    {        
         public frmSculpture()
         {
             InitializeComponent();
