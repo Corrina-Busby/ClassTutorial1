@@ -19,7 +19,7 @@ namespace Version_1_C
         }
 
         private clsArtistList _ArtistList = new clsArtistList();
-        private const string fileName = "gallery.xml";
+        private const string _FileName = "gallery.xml";
 
         private void updateDisplay()
         {
@@ -51,7 +51,7 @@ namespace Version_1_C
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
-            Save();
+            save();
             Close();
         }
 
@@ -68,11 +68,11 @@ namespace Version_1_C
             }
         }
 
-        private void Save()
+        private void save()
         {
             try
             {
-                System.IO.FileStream lcFileStream = new System.IO.FileStream(fileName, System.IO.FileMode.Create);
+                System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Create);
                 System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
                     new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
 
@@ -85,11 +85,11 @@ namespace Version_1_C
             }
         }
 
-        private void Retrieve()
+        private void retrieve()
         {
             try
             {
-                System.IO.FileStream lcFileStream = new System.IO.FileStream(fileName, System.IO.FileMode.Open);
+                System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Open);
                 System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
                     new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
 
@@ -106,7 +106,7 @@ namespace Version_1_C
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            Retrieve();
+            retrieve();
             updateDisplay();
         }
     }
