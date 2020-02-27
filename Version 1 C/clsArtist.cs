@@ -18,6 +18,12 @@ namespace Version_1_C
         
         private static frmArtist _ArtistDialog = new frmArtist();
 
+        public string Name { get => _Name; set => _Name = value; }
+        public string Speciality { get => _Speciality; set => _Speciality = value; }
+        public string Phone { get => _Phone; set => _Phone = value; }
+        public decimal TotalValue { get => _WorksList.GetTotalValue();}
+        public clsWorksList WorksList { get => _WorksList;}
+        public clsArtistList ArtistList { get => _ArtistList; /*set => _ArtistList = value;*/ }
 
         public clsArtist(clsArtistList prArtistList)
         {
@@ -27,29 +33,29 @@ namespace Version_1_C
         }
         
         // open up the edit dialog if all OK returns details
-        public void EditDetails() //(this)
+        public void EditDetails() 
         {
-            _ArtistDialog.SetDetails(_Name, _Speciality, _Phone, _WorksList, _ArtistList);
+            _ArtistDialog.SetDetails(this);
+            _TotalValue = _WorksList.GetTotalValue();
+        }
 
-            if (_ArtistDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                _ArtistDialog.GetDetails(ref _Name, ref _Speciality, ref _Phone);
-                _TotalValue = _WorksList.GetTotalValue();
-            }
+        public bool IsDuplicate(string prArtistName)
+        {
+            return _ArtistList.ContainsKey(prArtistName);
         }
 
         // get the artist name 
         // <returns> artist name
-        public string GetKey()
-        {
-            return _Name;
-        }
+        //public string GetKey()
+        //{
+        //    return _Name;
+        //}
 
         // get the value of artworks
         // <returns> the total value of the artworks
-        public decimal GetWorksValue()
-        {
-            return _TotalValue;
-        }
+        //public decimal GetWorksValue()
+        //{
+        //    return _TotalValue;
+        //}
     }
 }

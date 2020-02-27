@@ -5,24 +5,49 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-
+/// <summary>
+/// sort by date needs looked at
+/// </summary>
 namespace Version_1_C
 {
     public partial class frmArtist : Form
-    {
+    {        
         public frmArtist()
         {
             InitializeComponent();
         }
 
-        private clsArtistList _ArtistList;
         private clsWorksList _WorksList;
-        private byte _SortOrder; // 0 = Name, 1 = Date
+       // private byte _SortOrder; // 0 = Name, 1 = Date
+
+        private clsArtist _Artist;
+
+        private void updateForm()
+        {
+            txtName.Text = _Artist.Name;
+            txtSpeciality.Text = _Artist.Speciality;
+            txtPhone.Text = _Artist.Phone;
+            lblTotal.Text = _Artist.TotalValue.ToString();
+            _WorksList = _Artist.WorksList;
+     
+            //_WorksList = _WorksList;
+           // _SortOrder = _WorksList.SortOrder;
+            updateDisplay();
+        }
+
+        private void pushData()
+        {
+            _Artist.Name = txtName.Text;
+            _Artist.Speciality = txtSpeciality.Text;
+            _Artist.Phone = txtPhone.Text;
+
+        }
 
         private void updateDisplay()
         {
-            txtName.Enabled = txtName.Text == "";
-            if (_SortOrder == 0)
+            // txtName.Enabled = txtName.Text == "";
+            txtName.Enabled = string.IsNullOrEmpty(_Artist.Name);
+            if (_WorksList.SortOrder == 0)
             {
                 _WorksList.SortByName();
                 rbByName.Checked = true;
@@ -38,25 +63,21 @@ namespace Version_1_C
             lblTotal.Text = Convert.ToString(_WorksList.GetTotalValue());
         }
 
-        public void SetDetails(string prName, string prSpeciality, string prPhone,
-                               clsWorksList prWorksList, clsArtistList prArtistList)
+        public void SetDetails(clsArtist prArtist)
         {
-            txtName.Text = prName;
-            txtSpeciality.Text = prSpeciality;
-            txtPhone.Text = prPhone;
-            _ArtistList = prArtistList;
-            _WorksList = prWorksList;
-            _SortOrder = _WorksList.SortOrder; 
+            _Artist = prArtist;
+            updateForm();
             updateDisplay();
+            ShowDialog();
         }
 
-        public void GetDetails(ref string prName, ref string prSpeciality, ref string prPhone)
-        {
-            prName = txtName.Text;
-            prSpeciality = txtSpeciality.Text;
-            prPhone = txtPhone.Text;
-            _SortOrder = _WorksList.SortOrder;
-        }
+        //public void GetDetails(ref string prName, ref string prSpeciality, ref string prPhone)
+        //{
+        //    prName = txtName.Text;
+        //    prSpeciality = txtSpeciality.Text;
+        //    prPhone = txtPhone.Text;
+        //    _SortOrder = _WorksList.SortOrder;
+        //}
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -74,6 +95,7 @@ namespace Version_1_C
         {
             if (IsValid())
             {
+                pushData();
                 DialogResult = DialogResult.OK;
             }
         }
@@ -81,7 +103,7 @@ namespace Version_1_C
         public virtual Boolean IsValid()
         {
             if (txtName.Enabled && txtName.Text != "")
-                if (_ArtistList.Contains(txtName.Text))
+                if (_Artist.IsDuplicate(txtName.Text))
                 {
                     MessageBox.Show("Artist with that name already exists!");
                     return false;
@@ -104,7 +126,7 @@ namespace Version_1_C
 
         private void rbByDate_CheckedChanged(object sender, EventArgs e)
         {
-            _SortOrder = Convert.ToByte(rbByDate.Checked);
+            // _SortOrder = Convert.ToByte(rbByDate.Checked);
             updateDisplay();
         }
 
