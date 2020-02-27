@@ -1,5 +1,7 @@
 using System;
-
+/// <summary>
+/// moved _SortOrder ("Move Field") to clsWorkList as the new home, as this is what the sort-order applies to.
+/// </summary>
 namespace Version_1_C
 {
     [Serializable()] 
@@ -15,7 +17,7 @@ namespace Version_1_C
         private clsArtistList _ArtistList;
         
         private static frmArtist _ArtistDialog = new frmArtist();
-        private byte _SortOrder;
+
 
         public clsArtist(clsArtistList prArtistList)
         {
@@ -27,10 +29,11 @@ namespace Version_1_C
         // open up the edit dialog if all OK returns details
         public void EditDetails() //(this)
         {
-            _ArtistDialog.SetDetails(_Name, _Speciality, _Phone, _SortOrder, _WorksList, _ArtistList);
+            _ArtistDialog.SetDetails(_Name, _Speciality, _Phone, _WorksList, _ArtistList);
+
             if (_ArtistDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                _ArtistDialog.GetDetails(ref _Name, ref _Speciality, ref _Phone, ref _SortOrder);
+                _ArtistDialog.GetDetails(ref _Name, ref _Speciality, ref _Phone);
                 _TotalValue = _WorksList.GetTotalValue();
             }
         }

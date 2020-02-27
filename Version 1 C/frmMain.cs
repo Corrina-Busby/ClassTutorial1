@@ -11,7 +11,7 @@ namespace Version_1_C
     public partial class frmMain : Form
     {
         /// <summary>
-        /// Matthias Otto, NMIT, 2010-2016
+        /// Matthias Otto, NMIT, 2010-2016-2020
         /// </summary>
         public frmMain()
         {
