@@ -40,7 +40,6 @@ namespace Version_1_C
             _Artist.Name = txtName.Text;
             _Artist.Speciality = txtSpeciality.Text;
             _Artist.Phone = txtPhone.Text;
-
         }
 
         private void updateDisplay()

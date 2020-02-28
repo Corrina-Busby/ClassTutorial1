@@ -67,8 +67,6 @@ namespace Version_1_C
             }
         }
 
-
-
         private void frmMain_Load(object sender, EventArgs e)
         {
             _ArtistList = clsArtistList.Retrieve();
