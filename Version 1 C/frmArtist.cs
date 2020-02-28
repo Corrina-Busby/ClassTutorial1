@@ -18,7 +18,7 @@ namespace Version_1_C
         }
 
         private clsWorksList _WorksList;
-       // private byte _SortOrder; // 0 = Name, 1 = Date
+        private byte _SortOrder; // 0 = Name, 1 = Date
 
         private clsArtist _Artist;
 
@@ -40,11 +40,12 @@ namespace Version_1_C
             _Artist.Name = txtName.Text;
             _Artist.Speciality = txtSpeciality.Text;
             _Artist.Phone = txtPhone.Text;
+            _WorksList.SortOrder = _WorksList.SortOrder;
         }
 
         private void updateDisplay()
         {
-            // txtName.Enabled = txtName.Text == "";
+            txtName.Enabled = txtName.Text == "";
             txtName.Enabled = string.IsNullOrEmpty(_Artist.Name);
             if (_WorksList.SortOrder == 0)
             {
@@ -125,7 +126,7 @@ namespace Version_1_C
 
         private void rbByDate_CheckedChanged(object sender, EventArgs e)
         {
-            // _SortOrder = Convert.ToByte(rbByDate.Checked);
+            _WorksList.SortOrder = Convert.ToByte(rbByDate.Checked);
             updateDisplay();
         }
 
