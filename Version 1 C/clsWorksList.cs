@@ -1,17 +1,19 @@
 using System;
-using System.Collections;
-using System.Windows.Forms;
+using System.Collections.Generic;
+/// <summary>
+/// DeleteWork needs reworked currently commented out for the meantime
+/// </summary>
 
 namespace Version_1_C
 {
     [Serializable()] 
-    public class clsWorksList : ArrayList
+    public class clsWorksList : List<clsWork>
     {
         private static clsNameComparer _NameComparer = new clsNameComparer();
         private static clsDateComparer _DateComparer = new clsDateComparer();
-        private byte sortOrder;
+        private byte _SortOrder;
 
-        public byte SortOrder { get => sortOrder; set => sortOrder = value; }
+        public byte SortOrder { get => _SortOrder; set => _SortOrder = value; }   
 
         public void AddWork()
         {
@@ -21,18 +23,7 @@ namespace Version_1_C
                 Add(lcWork);
             }
         }
-       
-        public void DeleteWork(int prIndex)
-        {
-            if (prIndex >= 0 && prIndex < this.Count)
-            {
-                if (MessageBox.Show("Are you sure?", "Deleting work", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    this.RemoveAt(prIndex);
-                }
-            }
-        }
-        
+
         public void EditWork(int prIndex)
         {
             if (prIndex >= 0 && prIndex < this.Count)
@@ -42,7 +33,7 @@ namespace Version_1_C
             }
             else
             {
-                MessageBox.Show("Sorry no work selected #" + Convert.ToString(prIndex));
+                 throw new Exception("Sorry no work selected #" + Convert.ToString(prIndex));
             }
         }
 
@@ -59,11 +50,13 @@ namespace Version_1_C
          public void SortByName()
          {
              Sort(_NameComparer);
+            
          }
     
         public void SortByDate()
         {
             Sort(_DateComparer);
+            
         }
     }
 }

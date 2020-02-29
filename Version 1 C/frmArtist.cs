@@ -18,7 +18,7 @@ namespace Version_1_C
         }
 
         private clsWorksList _WorksList;
-        private byte _SortOrder; // 0 = Name, 1 = Date
+        //private byte _SortOrder; // 0 = Name, 1 = Date
 
         private clsArtist _Artist;
 
@@ -81,9 +81,17 @@ namespace Version_1_C
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            _WorksList.DeleteWork(lstWorks.SelectedIndex);
+            if (lstWorks.SelectedIndex >= 0 && lstWorks.SelectedIndex < _WorksList.Count)
+            {
+                if (MessageBox.Show("Are you sure?", "Deleting work", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    _WorksList.RemoveAt(lstWorks.SelectedIndex);
+                }
+            }
             updateDisplay();
         }
+
+        
 
         private void btnAdd_Click(object sender, EventArgs e)
         {

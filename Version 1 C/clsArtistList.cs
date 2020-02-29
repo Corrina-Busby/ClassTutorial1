@@ -1,11 +1,12 @@
 using System;
-using System.Collections;
-using System.Windows.Forms;
+using System.Collections.Generic;
+
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Version_1_C
 {
     [Serializable()] 
-    public class clsArtistList : SortedList
+    public class clsArtistList : SortedList<string, clsArtist>
     {
         private const string _FileName = "gallery.xml";
 
@@ -16,7 +17,7 @@ namespace Version_1_C
             if (lcArtist != null)
                 lcArtist.EditDetails();
             else
-                MessageBox.Show("Sorry no artist by this name");
+                throw new Exception("Sorry no artist by this name");
         }
        
         public void NewArtist()
@@ -26,13 +27,12 @@ namespace Version_1_C
             {
                 if (lcArtist.Name != "")
                 {
-                    Add(lcArtist.Name, lcArtist);
-                    MessageBox.Show("Artist added!");
+                    Add(lcArtist.Name, lcArtist);           
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Duplicate Key!");
+                throw new Exception("Duplicate Key!");
             }
         }
         
@@ -48,19 +48,14 @@ namespace Version_1_C
 
         public void Save()
         {
-            try
-            {
+       
                 System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Create);
-                System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
-                    new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
+                BinaryFormatter lcFormatter =
+                    new BinaryFormatter();
 
                 lcFormatter.Serialize(lcFileStream, this);
                 lcFileStream.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "File Save Error");
-            }
+       
         }
 
         public static clsArtistList Retrieve()
@@ -69,8 +64,8 @@ namespace Version_1_C
             try
             {
                 System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Open);
-                System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
-                    new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
+                BinaryFormatter lcFormatter =
+                    new BinaryFormatter();
 
                 lcArtistList = (clsArtistList)lcFormatter.Deserialize(lcFileStream);
 
@@ -79,8 +74,7 @@ namespace Version_1_C
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "File Retrieve Error");
-                lcArtistList = new clsArtistList();
+                lcArtistList = new clsArtistList();     
             }
             return lcArtistList;
         }
