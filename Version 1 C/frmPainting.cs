@@ -10,7 +10,6 @@ namespace Version_1_C
 {
     public partial class frmPainting : Version_1_C.frmWork
     {
-
         public frmPainting()
         {
             InitializeComponent();
