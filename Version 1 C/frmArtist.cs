@@ -108,6 +108,7 @@ namespace Version_1_C
             }
         }
 
+
         public virtual Boolean IsValid()
         {
             if (txtName.Enabled && txtName.Text != "")
