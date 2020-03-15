@@ -1,6 +1,8 @@
 using System;
 /// <summary>
 ///             "Move Field" _SortOrder to clsWorkslist - frmArtist Set and Get details ammended for the build
+///             Bad code smell of long parameter lists - "Replace Parameter with Method"
+///             Deleting the set methods for ArtistList, WorksList and TotalValue someohow makes them Readonly ...??? taking "set" away?
 /// </summary>
 namespace Version_1_C
 {
@@ -18,6 +20,13 @@ namespace Version_1_C
         
         private static frmArtist _ArtistDialog = new frmArtist();
 
+        public string Name { get => _Name; set => _Name = value; }
+        public string Speciality { get => _Speciality; set => _Speciality = value; }
+        public string Phone { get => _Phone; set => _Phone = value; }
+        public decimal TotalValue { get => _TotalValue; /*set => _TotalValue = value;*/ }  // delete or comment out makes readonly
+        public clsWorksList WorksList { get => _WorksList; /* set => _WorksList = value;*/ }
+        public clsArtistList ArtistList { get => _ArtistList; /* set => _ArtistList = value; */ }
+
         public clsArtist(clsArtistList prArtistList)
         {
             _WorksList = new clsWorksList();
@@ -25,24 +34,21 @@ namespace Version_1_C
             EditDetails();
         }
         
+        // edit details was simplified greatly since all the work of getting an setting the artist deets is now done by the form
         public void EditDetails()
         {
-            _ArtistDialog.SetDetails(_Name, _Speciality, _Phone, _WorksList, _ArtistList);
-            if (_ArtistDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                _ArtistDialog.GetDetails(ref _Name, ref _Speciality, ref _Phone);
-                _TotalValue = _WorksList.GetTotalValue();
-            }
+            _ArtistDialog.SetDetails(this);
+            _TotalValue = _WorksList.GetTotalValue();            
         }
 
-        public string GetKey()
-        {
-            return _Name;
-        }
+        //public string GetKey()
+        //{
+        //    return Name;
+        //}
 
-        public decimal GetWorksValue()
-        {
-            return _TotalValue;
-        }
+        //public decimal GetWorksValue()
+        //{
+        //    return TotalValue;
+        //}
     }
 }

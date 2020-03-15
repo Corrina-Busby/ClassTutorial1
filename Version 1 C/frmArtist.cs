@@ -19,6 +19,8 @@ namespace Version_1_C
         private clsWorksList _WorksList;
         private byte _SortOrder; // 0 = Name, 1 = Date
 
+        private clsArtist _Artist;
+
         private void updateDisplay()
         {
             txtName.Enabled = txtName.Text == "";
@@ -38,25 +40,36 @@ namespace Version_1_C
             lblTotal.Text = Convert.ToString(_WorksList.GetTotalValue());
         }
 
-        public void SetDetails(string prName, string prSpeciality, string prPhone,
-                               clsWorksList prWorksList, clsArtistList prArtistList)
+        public void SetDetails(clsArtist prArtist)
         {
-            txtName.Text = prName;
-            txtSpeciality.Text = prSpeciality;
-            txtPhone.Text = prPhone;
-            _ArtistList = prArtistList;
-            _WorksList = prWorksList;
-            _SortOrder = _WorksList.SortOrder;
+            _Artist = prArtist;
+            updateForm();
             updateDisplay();
+            ShowDialog();
         }
 
-        public void GetDetails(ref string prName, ref string prSpeciality, ref string prPhone)
+        private void updateForm()
         {
-            prName = txtName.Text;
-            prSpeciality = txtSpeciality.Text;
-            prPhone = txtPhone.Text;
-            _SortOrder = _WorksList.SortOrder;
+            txtName.Text = _Artist.Name;
+            txtSpeciality.Text = _Artist.Speciality;
+            txtPhone.Text = _Artist.Phone;
+            _WorksList = _Artist.WorksList;
         }
+
+        private void pushData()
+        {
+            _Artist.Name = txtName.Text;
+            _Artist.Speciality = txtSpeciality.Text;
+            _Artist.Phone = txtPhone.Text;
+        }
+
+        //public void GetDetails(ref string prName, ref string prSpeciality, ref string prPhone)
+        //{
+        //    prName = txtName.Text;
+        //    prSpeciality = txtSpeciality.Text;
+        //    prPhone = txtPhone.Text;
+        //    _SortOrder = _WorksList.SortOrder;
+        //}
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -73,7 +86,8 @@ namespace Version_1_C
         private void btnClose_Click(object sender, EventArgs e)
         {
             if (isValid())
-            {
+            { //pushdata b4 okying to close form
+                pushData(); 
                 DialogResult = DialogResult.OK;
             }
         }

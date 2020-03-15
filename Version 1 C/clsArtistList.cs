@@ -20,30 +20,41 @@ namespace Version_1_C
             else
                 MessageBox.Show("Sorry no artist by this name");
         }
-       
+
         public void NewArtist()
         {
             clsArtist lcArtist = new clsArtist(this);
-            try
             {
-                if (lcArtist.GetKey() != "")
+                if (lcArtist.Name != "")
                 {
-                    Add(lcArtist.GetKey(), lcArtist);
-                    MessageBox.Show("Artist added!");
+                    Add(lcArtist.Name, lcArtist);
+                   // MessageBox.Show("Artist added!");
                 }
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Duplicate Key!");
-            }
         }
+        //public void NewArtist()
+        //{
+        //    clsArtist lcArtist = new clsArtist(this);
+        //    try
+        //    {
+        //        if (lcArtist.Name != "")
+        //        {
+        //            Add(lcArtist.Name, lcArtist);
+        //            MessageBox.Show("Artist added!");
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        MessageBox.Show("Duplicate Key!");
+        //    }
+        //}
         
         public decimal GetTotalValue()
         {
             decimal lcTotal = 0;
             foreach (clsArtist lcArtist in Values)
             {
-                lcTotal += lcArtist.GetWorksValue();
+                lcTotal += lcArtist.TotalValue;
             }
             return lcTotal;
         }
