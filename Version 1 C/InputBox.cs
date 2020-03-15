@@ -10,7 +10,7 @@ namespace Version_1_C
 {
     public partial class InputBox : Form
     {
-        private string answer;
+        private string _Answer;
 
         public InputBox(string question)
         {
@@ -24,7 +24,7 @@ namespace Version_1_C
         {
             if (txtAnswer.Text.Length > 0 && txtAnswer.Text.Length < 2)
             {
-                answer = txtAnswer.Text;
+                _Answer = txtAnswer.Text;
                 DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -40,9 +40,9 @@ namespace Version_1_C
             Close();
         }
 
-        public string getAnswer()
+        public string Answer()
         {
-            return answer;
+            return _Answer;
         }
     }
 }

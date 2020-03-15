@@ -6,23 +6,23 @@ namespace Version_1_C
     [Serializable()] 
     public class clsPainting : clsWork
     {
-        private float theWidth;
-        private float theHeight;
-        private string theType;
+        private float _Width;
+        private float _Height;
+        private string _Type;
 
         [NonSerialized()]
-        private static frmPainting paintDialog;
+        private static frmPainting _PaintDialog;
 
         public override void EditDetails()
         {
-            if (paintDialog == null)
+            if (_PaintDialog == null)
             {
-                paintDialog = new frmPainting();
+                _PaintDialog = new frmPainting();
             }
-            paintDialog.SetDetails(_Name, theDate, theValue, theWidth, theHeight, theType);
-            if(paintDialog.ShowDialog() == DialogResult.OK)
+            _PaintDialog.SetDetails(_Name, _Date, _Value, _Width, _Height, _Type);
+            if(_PaintDialog.ShowDialog() == DialogResult.OK)
             {
-               paintDialog.GetDetails(ref _Name, ref theDate, ref theValue, ref theWidth, ref theHeight, ref theType);
+               _PaintDialog.GetDetails(ref _Name, ref _Date, ref _Value, ref _Width, ref _Height, ref _Type);
             }
         }
     }
